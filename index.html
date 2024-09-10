@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Understanding JavaScript Async Concepts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal dark:bg-gray-900 dark:text-gray-100">
+
+  <!-- Responsive Navbar with Links to Each Section -->
+  <nav class="bg-blue-600 p-4 sticky top-0 z-50 dark:bg-blue-800">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white text-2xl font-bold">JS Async Concepts</h1>
+      <div class="hidden md:flex space-x-6">
+        <a href="pages/async.html" class="text-white hover:text-yellow-300">Async</a>
+        <a href="pages/callback.html" class="text-white hover:text-yellow-300">Callback</a>
+        <a href="pages/promise.html" class="text-white hover:text-yellow-300">Promise</a>
+        <a href="pages/async-await.html" class="text-white hover:text-yellow-300">Async/Await</a>
+        <a href="pages/event-loop.html" class="text-white hover:text-yellow-300">Event Loop</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto py-10">
+    <div class="relative overflow-hidden w-full h-[500px]"> <!-- Aumentado el alto del carrusel -->
+      <div class="flex transition-transform duration-500 ease-in-out" id="carousel">
+        <div class="min-w-full h-[500px] flex items-center justify-center"><img src="/img/foto2.webp" alt="Slide 1" class="w-full h-full object-cover"></div>
+        <div class="min-w-full h-[500px] flex items-center justify-center"><img src="/img/foto1.jpg" alt="Slide 2" class="w-full h-full object-cover"></div>
+        <div class="min-w-full h-[500px] flex items-center justify-center"><img src="/img/foto3.jpg" alt="Slide 3" class="w-full h-full object-cover"></div>
+        <div class="min-w-full h-[500px] flex items-center justify-center"><img src="/img/foto4.jpg" alt="Slide 4" class="w-full h-full object-cover"></div>
+      </div>
+      <button onclick="prevSlide()" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full">❮</button>
+      <button onclick="nextSlide()" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full">❯</button>
+    </div>
+    <h2 class="text-3xl font-bold mt-10 mb-4">Welcome to JS Async Concepts</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">Click on the links above to learn more about each concept.</p>
+
+    <!-- Developer Information Section -->
+    <section class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg mt-10">
+      <div class="flex items-center">
+        <img src="/img/foto santiago.jpg" alt="Developer Photo" class="w-40 h-40 rounded-full mr-6"> <!-- Ajustado el tamaño de la foto -->
+        <div>
+          <h3 class="text-3xl font-bold">Santiago David Heras Arciniegas</h3> <!-- Agrandado el tamaño del texto -->
+          <p class="text-gray-600 dark:text-gray-400 text-m">Estudiante 10mo semestre Ingeniería de Sistemas</p> <!-- Agrandado el tamaño del texto -->
+          <p class="text-gray-700 dark:text-gray-300 mt-4 text-l">Soy un estudiante universitario apasionado por el desarrollo web con experiencia en JavaScript, Python y Node.js.</p> <!-- Agrandado el tamaño del texto -->
+          <ul class="list-disc list-inside mt-4 text-gray-700 dark:text-gray-300 text-lg"> <!-- Agrandado el tamaño del texto -->
+            <li><strong>Proyectos destacados:</strong> <a href="https://github.com/sdhavar/Proyecto-Final" class="text-blue-500 hover:underline">Zoom 2 en Java</a>, <a href="https://github.com/sdhavar/Price-Hive" class="text-blue-500 hover:underline">Price-Hive (Webscrapping)</a></li>
+            <li><strong>Educación y certificaciones:</strong> Pregrado en Ingeniería de Sistemas (2025)</li>
+            <li><strong>Habilidades técnicas:</strong> JavaScript, HTML, CSS, Node.js</li>
+            <li><strong>Enlaces a redes profesionales:</strong> <a href="https://www.linkedin.com/in/santiagoheras-ist/" class="text-blue-500 hover:underline">LinkedIn</a>, <a href="https://github.com/sdhavar" class="text-blue-500 hover:underline">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-blue-600 text-white py-4 dark:bg-blue-800">
+    <div class="container mx-auto text-center">
+      <p>Created by Santiago Heras © 2024</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.getElementById('carousel');
+    const totalSlides = slides.children.length;
+
+    function showSlide(index) {
+      slides.style.transform = `translateX(-${100 * index}%)`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+  </script>
+
+</body>
+</html>

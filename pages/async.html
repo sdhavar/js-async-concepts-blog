@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Async</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+</head>
+<body class="bg-gray-900 text-white font-sans leading-normal tracking-normal">
+
+  <nav class="bg-blue-600 p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white text-2xl font-bold">JS Async Concepts</h1>
+      <div class="hidden md:flex space-x-6">
+        <a href="../index.html" class="text-white hover:text-yellow-300">Home</a>
+        <a href="callback.html" class="text-white hover:text-yellow-300">Callback</a>
+        <a href="promise.html" class="text-white hover:text-yellow-300">Promise</a>
+        <a href="async-await.html" class="text-white hover:text-yellow-300">Async/Await</a>
+        <a href="event-loop.html" class="text-white hover:text-yellow-300">Event Loop</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto py-10">
+    <section class="bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4">JavaScript Async</h2>
+      <p class="text-gray-300 mb-4">
+        JavaScript is single-threaded and asynchronous by nature, meaning it can perform tasks like fetching data, making HTTP requests, or reading files without blocking the main execution flow.
+      </p>
+      <div class="bg-gray-700 p-4 rounded">
+        <h3 class="font-bold">Example:</h3>
+        <textarea id="code" name="code" class="w-full h-40 p-2 border rounded bg-gray-800 text-white" readonly></textarea>
+        <pre id="output" class="mt-4 p-4 bg-gray-900 rounded text-white">
+Output:
+Start
+End
+Async Code (after 2 seconds)
+        </pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-blue-600 text-white py-4">
+    <div class="container mx-auto text-center">
+      <p>Created by Santiago Heras © 2024</p>
+    </div>
+  </footer>
+
+  <script>
+    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+      lineNumbers: true,
+      mode: 'javascript',
+      theme: 'dracula',
+      readOnly: true
+    });
+
+    editor.setValue(`
+// Simulating async behavior with setTimeout
+console.log('Start');
+setTimeout(() => {
+    console.log('Async Code');
+}, 2000);
+console.log('End');
+// Output: 
+// Start 
+// End 
+// Async Code (after 2 seconds)
+    `);
+  </script>
+
+</body>
+</html>

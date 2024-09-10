@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Async/Await</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+</head>
+<body class="bg-gray-900 text-white font-sans leading-normal tracking-normal">
+
+  <nav class="bg-blue-600 p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white text-2xl font-bold hover:text-yellow-300 transition duration-300">JS Async Concepts</h1>
+      <div class="hidden md:flex space-x-6">
+        <a href="../index.html" class="text-white hover:text-yellow-300">Home</a>
+        <a href="async.html" class="text-white hover:text-yellow-300">Async</a>
+        <a href="callback.html" class="text-white hover:text-yellow-300">Callback</a>
+        <a href="promise.html" class="text-white hover:text-yellow-300">Promise</a>
+        <a href="event-loop.html" class="text-white hover:text-yellow-300">Event Loop</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto py-10">
+    <section class="bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4 hover:text-yellow-300 transition duration-300">Async/Await</h2>
+      <p class="text-gray-300 mb-4">
+        Async/Await is a modern way to handle asynchronous operations in JavaScript. It is syntactic sugar over Promises, making async code look more like synchronous code.
+      </p>
+
+      <div class="bg-gray-700 p-4 rounded mb-8">
+        <h3 class="font-bold text-xl text-blue-400 hover:text-yellow-300 transition duration-300">Async:</h3>
+        <p class="text-gray-300 mb-4">
+          The `async` keyword is used to declare an asynchronous function. This means that the function will always return a Promise, and allows the use of `await` within it.
+        </p>
+        <h4 class="font-bold text-lg text-blue-300 hover:text-yellow-300 transition duration-300">Example:</h4>
+        <textarea id="code-async" name="code-async" class="w-full h-40 p-2 border rounded bg-gray-900 text-white"></textarea>
+        <pre id="output-async" class="mt-4 p-4 bg-gray-600 rounded text-white"></pre>
+      </div>
+
+      <div class="bg-gray-700 p-4 rounded mb-8">
+        <h3 class="font-bold text-xl text-blue-400 hover:text-yellow-300 transition duration-300">Await:</h3>
+        <p class="text-gray-300 mb-4">
+          The `await` keyword is used to wait for a Promise to resolve. It can only be used inside an `async` function. When `await` is used, the function pauses execution until the Promise is resolved.
+        </p>
+        <h4 class="font-bold text-lg text-blue-300 hover:text-yellow-300 transition duration-300">Example:</h4>
+        <textarea id="code-await" name="code-await" class="w-full h-40 p-2 border rounded bg-gray-900 text-white"></textarea>
+        <pre id="output-await" class="mt-4 p-4 bg-gray-600 rounded text-white"></pre>
+      </div>
+
+      <div class="bg-gray-700 p-4 rounded">
+        <h3 class="font-bold text-xl text-blue-400 hover:text-yellow-300 transition duration-300">Async/Await with .then():</h3>
+        <p class="text-gray-300 mb-4">
+          Sometimes, you might need to use `async/await` in combination with `.then()`. This can be useful when dealing with multiple asynchronous operations that depend on each other.
+        </p>
+        <h4 class="font-bold text-lg text-blue-300 hover:text-yellow-300 transition duration-300">Example:</h4>
+        <textarea id="code-async-await-then" name="code-async-await-then" class="w-full h-40 p-2 border rounded bg-gray-900 text-white"></textarea>
+        <pre id="output-async-await-then" class="mt-4 p-4 bg-gray-600 rounded text-white"></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-blue-600 text-white py-4">
+    <div class="container mx-auto text-center">
+      <p>Created by Santiago Heras © 2024</p>
+    </div>
+  </footer>
+
+  <script>
+    function setupCodeMirror(id, code, outputId, output) {
+      const editor = CodeMirror.fromTextArea(document.getElementById(id), {
+        lineNumbers: true,
+        mode: 'javascript',
+        theme: 'dracula',
+        readOnly: true
+      });
+      editor.setValue(code);
+      document.getElementById(outputId).textContent = output;
+    }
+
+    setupCodeMirror('code-async', `
+// Using async
+async function request() {
+  const response = await fetch("/robots.txt");
+  const data = await response.text();
+  return data;
+}
+
+request().then(data => console.log(data));
+    `, 'output-async', 'Contenido del archivo robots.txt');
+
+    setupCodeMirror('code-await', `
+// Using await
+async function exampleAwait() {
+  const response = await fetch("/robots.txt");
+  const data = await response.text();
+  console.log(data);
+
+  console.log("Código síncrono.");
+}
+
+exampleAwait();
+    `, 'output-await', 'Contenido del archivo robots.txt\nCódigo síncrono.');
+
+    setupCodeMirror('code-async-await-then', `
+// Using async/await with .then()
+async function request() {
+  return await fetch("/robots.txt")
+      .then(response => response.text());
+}
+
+request().then(data => console.log(data));
+    `, 'output-async-await-then', 'Contenido del archivo robots.txt');
+  </script>
+
+</body>
+</html>
